@@ -1,0 +1,72 @@
+{% extends "tmacweb/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="project_name">
+
+</div>
+<div class="project_desc">
+
+</div>
+<div class="project_tasks">
+
+</div>
+<button type="button"  onclick="task_add()">Add Task</button>
+<div class="members">
+    
+
+</div>
+<button type="button"  onclick="member_add()">Add members</button>
+<button type="button" class="btn btn-primary" id = "btn-sds"data-toggle="modal" data-target="#myModal" style="display: none;">
+            
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form method="post" action="/newmember/{{id}}" class="inactive" id="member_form">
+                {% csrf_token %} 
+                Member Username <input type="text" name="new_user" required>
+                <input type="submit" value="Add Member">
+            </form>
+            <form method="post" action="/newtask/{{id}}" class="inactive" id="task_form">
+                {% csrf_token %} 
+                Task Name <input type="text" name="task_name" required><br>
+                Task Info   <input type="text" name="task_desc" required><br>
+                User        <input type="text" name="task_user" required><br>
+                Priority    <input type="text" name="task_priority" required><br>
+                <input type="submit" value="Create Task">
+            
+            </form>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript">
+    const passing = "{{id}}";
+    </script>
+    <link href="{% static 'tmacweb/projectpage.css' %}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'tmacweb/projectpage.js' %}"></script>
+{% endblock %}

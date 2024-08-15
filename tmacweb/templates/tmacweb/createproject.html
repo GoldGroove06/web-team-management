@@ -1,5 +1,11 @@
 {% extends "tmacweb/layout.html" %}
 
 {% block body %}
+<form method="post" action={% url 'createproject' %} > 
+    {% csrf_token %}
+    Project Name: <input type="text" name="projectname" > <br>
+    Description: <input type="text" name="projectdesc"><br>
+    <input type="submit">
 
+</form>
 {% endblock %}

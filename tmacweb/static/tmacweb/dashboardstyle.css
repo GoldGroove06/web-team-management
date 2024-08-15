@@ -1,0 +1,42 @@
+#container{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+#calendar{
+    display: flex;
+    flex:1;
+    
+    
+}
+#projects{
+    display: flex;
+    background-color: rgb(70, 70, 136);
+    flex-direction: column;
+    height: 80%;
+    width:40%;
+    padding: 10px;
+    margin:20px;
+
+    
+
+}
+#updates{
+    display: flex;
+    background-color: yellow;
+    
+}
+
+#puContainer{
+    display: flex;
+    flex:2;
+    flex-direction: column;
+}
+
+.listdiv{
+    border-color: black;
+    border-style: solid;
+    margin:10px;
+    
+}

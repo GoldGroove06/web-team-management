@@ -15,10 +15,11 @@ class members(models.Model):
 
 class Tasks(models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    task_id = models.AutoField(primary_key=True)
     task = models.CharField(max_length=64)
     task_info = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
-    
+    user = models.CharField(max_length=64,default=None)
     priority = models.CharField(max_length=20)
     
 

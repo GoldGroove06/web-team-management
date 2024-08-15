@@ -1,0 +1,61 @@
+{% extends "tmacweb/layout.html" %}
+{% load static %}
+{% block script %}
+    <link href="{% static 'tmacweb/dashboardstyle.css' %}" rel="stylesheet">
+    <script src="{% static 'tmacweb/dashboard.js' %}"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% endblock %}
+{% block body %}
+    <div id="container">
+        <div id='calendar'></div>
+        
+        <div id="puContainer">
+            <div id="projects"><h2 style="margin-left: 10px;">Projects</h2> </div>
+                
+                <div id="updates">updates  </div>
+        </div>
+       <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" id = "btn-sds"data-toggle="modal" data-target="#myModal" style="display: none;">
+            
+        </button>
+  
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+        
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="taskContainer">
+                            
+                    </div>
+                    <a href="#">manage task</a> 
+                    <div class="membersContainer">
+                       
+                    </div>
+                    <a href="#">add members</a> 
+                    
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+        
+            </div>
+            </div>
+        </div>
+  
+  </div>
+{% endblock %}
+
