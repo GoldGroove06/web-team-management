@@ -19,6 +19,7 @@ class Tasks(models.Model):
     task = models.CharField(max_length=64)
     task_info = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
+    last_date = models.DateTimeField()
     user = models.CharField(max_length=64,default=None)
     priority = models.CharField(max_length=20)
     

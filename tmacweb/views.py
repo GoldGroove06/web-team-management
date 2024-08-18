@@ -9,9 +9,30 @@ from django.contrib import messages
 from .models import User,Projects, Tasks, members
 from django.shortcuts import redirect
 from django.http import JsonResponse
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
+priority_choices=(
+    ("L", "Low"),
+    ("N", "Normal"),
+    ("H", "High")
+)
 
-# Create your views here.
+class new_task_form(forms.Form):
+    task = forms.CharField(max_length=64)
+    task_info = forms.CharField(max_length=200)
+    last_date = forms.DateTimeField( input_formats=['%Y-%m-%d %H:%M:%S'], 
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+    user = forms.CharField(max_length=64)
+    priority = forms.ChoiceField(choices=priority_choices)
+
+    def clean_user(self):
+        user = self.cleaned_data.get("user")
+        if not User.objects.filter(username=user).exists():
+            raise ValidationError("User doesn't exist")
+        return user
+   
+error_message = ''        
 
 def homepage(request):
    return render(request, "tmacweb/homepage.html")
@@ -81,7 +102,7 @@ def createproject(request):
 
 def projectpage(request, id):
     return render(request, "tmacweb/projectpage.html",{
-        "id":id,
+        "id":id, "task_form":new_task_form, "error" : error_message
     })
 
 
@@ -139,10 +160,12 @@ def apiproject(request, id):
 
 def newmember(request, pid):
     if request.method == "POST":
+        print(request.body)
         try:
             User.objects.get(username = request.POST["new_user"])
         except User.DoesNotExist:
-            return JsonResponse({"message":"Username does not exist"})
+            messages.success(request, "User Doesn't exist")
+            return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
 
         p = Projects.objects.get(project_id = pid)
         members.objects.create(
@@ -150,16 +173,54 @@ def newmember(request, pid):
             user = request.POST["new_user"],
         )
         return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
+
+        
         
 def newtask(request,pid):
     if request.method == "POST":
-        p = Projects.objects.get(project_id = pid)
-        Tasks.objects.create(
-            project_id = p,
-            task = request.POST["task_name"],
-            task_info = request.POST["task_desc"],
-            user = request.POST["task_user"],
-            priority = request.POST["task_priority"],
-
-        )
+       form = new_task_form(request.POST)
+       if form.is_valid():
         return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
+       else :
+           error_message = "User Doesn't exist"
+           return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
+       
+
+
+def calendarfetch(request):
+    m_tasklist = Tasks.objects.filter(user = str(request.user))
+    p_list  = Projects.objects.filter(team_leader = str(request.user))
+    t_list = []
+    
+    for i in p_list:
+         temp = Tasks.objects.filter(project_id = i)
+         for a in temp:
+            t_list.append(a)
+    r_dict={}
+    d_list =[]
+    for s in t_list:
+       
+        d_list.append({
+            "task_id":s.task_id,
+            "task":s.task,
+            "task_info":s.task_info,
+            "last_date":s.last_date,
+            "user":s.user,
+            "priority":s.priority,
+        })
+    r_dict["team_tasks"] = d_list
+    q_list= []
+    for a in m_tasklist:
+        q_list.append({
+            "task_id":a.task_id,
+            "task":a.task,
+            "task_info":a.task_info,
+            "last_date":a.last_date,
+            "user":a.user,
+            "priority":a.priority,
+        })
+    r_dict["user_tasks"] = q_list
+
+
+
+    return JsonResponse(r_dict, status = 200)

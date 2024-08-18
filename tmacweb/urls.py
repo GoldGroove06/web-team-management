@@ -17,6 +17,7 @@ urlpatterns = [
     #api 
     path("projectlistapi", views.apipl, name="projectlistapi"),
     path("projectfetch/<int:id>", views.apiproject, name="projectfetch"),
+    path("calendarfetch", views.calendarfetch, name="calendarfetch" ),
     
     
 ]

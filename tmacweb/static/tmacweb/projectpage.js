@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     page_render();
+   
 })
 
 function page_render(){
@@ -21,6 +22,8 @@ function page_render(){
             document.querySelector(".members").append(data.members[i])
             }
        })
+
+   
 }
 
 function member_add(){
@@ -36,3 +39,5 @@ function task_add() {
     document.querySelector("#task_form").className="active"
     document.querySelector("#btn-sds").click();
 }
+
+

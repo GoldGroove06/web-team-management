@@ -3,6 +3,7 @@
 {% block script %}
     <link href="{% static 'tmacweb/dashboardstyle.css' %}" rel="stylesheet">
     <script src="{% static 'tmacweb/dashboard.js' %}"></script>
+   
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -36,14 +37,20 @@
         
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="taskContainer">
+                    <div class="inactive" id="ProjectContainer">
+                        <div class="taskContainer">
                             
+                        </div>
+                        <a onclick="redirect()">manage task</a> 
+                        <div class="membersContainer">
+                           
+                        </div>
+                        <a href="#">add members</a>
                     </div>
-                    <a href="#">manage task</a> 
-                    <div class="membersContainer">
-                       
+                    <div class="inactive" id="calendarTask">
+
                     </div>
-                    <a href="#">add members</a> 
+                     
                     
                 </div>
         

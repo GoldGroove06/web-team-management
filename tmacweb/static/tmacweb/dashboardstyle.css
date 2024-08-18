@@ -6,7 +6,8 @@
 
 #calendar{
     display: flex;
-    flex:1;
+    width: 60%;
+    flex:2;
     
     
 }
@@ -30,8 +31,9 @@
 
 #puContainer{
     display: flex;
-    flex:2;
+    flex:1;
     flex-direction: column;
+    width: 40%;
 }
 
 .listdiv{
@@ -39,4 +41,12 @@
     border-style: solid;
     margin:10px;
     
+}
+
+.inactive{
+    display: none;
+}
+
+.active{
+    display: block;
 }
