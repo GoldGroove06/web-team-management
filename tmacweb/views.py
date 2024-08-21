@@ -138,6 +138,7 @@ def apiproject(request, id):
             "project_id"   : project.project_id,
             "project_name" : project.project_name,
             "project_info" : project.project_info, 
+            "project_user" : project.team_leader,
         }
     r_dict["project"] = temp_dict
     m_list = []
@@ -187,7 +188,7 @@ def newtask(request,pid):
        
 
 
-def calendarfetch(request):
+def taskfetch(request):
     m_tasklist = Tasks.objects.filter(user = str(request.user))
     p_list  = Projects.objects.filter(team_leader = str(request.user))
     t_list = []
@@ -207,6 +208,7 @@ def calendarfetch(request):
             "last_date":s.last_date,
             "user":s.user,
             "priority":s.priority,
+            "status":s.status
         })
     r_dict["team_tasks"] = d_list
     q_list= []
@@ -218,9 +220,23 @@ def calendarfetch(request):
             "last_date":a.last_date,
             "user":a.user,
             "priority":a.priority,
+            "status":a.status,
         })
     r_dict["user_tasks"] = q_list
 
 
 
     return JsonResponse(r_dict, status = 200)
+
+
+def taskapi(request, id):
+    project = Projects.objects.get(project_id = id)
+    tasks = Tasks.objects.filter(project_id = project, user = str(request.user))
+    r_dict={}
+    r_dict["tasks"] = [task.serialize() for task in tasks]
+    return JsonResponse(r_dict, status= 200)
+    
+    
+def taskstatus(request,id,stat):
+    if request.method== "PUT":
+        print("hello")

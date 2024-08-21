@@ -2,21 +2,43 @@
 {% load static %}
 {% block body %}
 
+<div class="pnamedesc_container">
 <div class="project_name">
 
 </div>
 <div class="project_desc">
 
 </div>
-<div class="project_tasks">
+<div class="am-btn-div"></div>
 
 </div>
-<button type="button"  onclick="task_add()">Add Task</button>
+<div class="taskContainer">
+    <div class="tasks">
+        <h2>Project Tasks</h2>
+        <div class="btn-div">
+            
+        </div>
+        
+    </div>
+    
+    <div class="active">
+        <h2>active</h2>
+        
+    </div>
+    <div class="completed">
+        <h2>completed</h2>
+    </div>
+    <div class="backlog">
+       <h2>backlog</h2> 
+    </div>
+</div>
+
+
 <div class="members">
     
 
 </div>
-<button type="button"  onclick="member_add()">Add members</button>
+
 <button type="button" class="btn btn-primary" id = "btn-sds"data-toggle="modal" data-target="#myModal" style="display: none;">
             
 </button>
@@ -60,6 +82,7 @@
 
     </div>
     </div>
+
 {% endblock %}
 
 
@@ -67,6 +90,7 @@
     <script type="text/javascript">
     const passing = "{{id}}";
     let csrf_token = "{{ csrf_token }} "
+    let user_id =  "{{user.username}}"
     </script>
 
     <link href="{% static 'tmacweb/projectpage.css' %}" rel="stylesheet">

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 function calendar_render() {
-  fetch("/calendarfetch",{
+  fetch("/taskfetch",{
     method:"GET"
   })
   .then(response => response.json())
@@ -81,7 +81,7 @@ fetch("/projectlistapi",{
     const childdiv = document.createElement("div");
     childdiv.setAttribute("data-key", data[i].project_id);
     childdiv.className = "listdiv"
-    childdiv.innerHTML = `${data[i].project_name} <br>${data[i].project_info}`;
+    childdiv.innerHTML = `${data[i].project_name} <br>${data[i].project_info} `;
 
     document.querySelector("#projects").append(childdiv);
     

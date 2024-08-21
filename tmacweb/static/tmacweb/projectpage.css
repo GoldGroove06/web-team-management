@@ -4,3 +4,88 @@
  .active{
     display: block;
  }
+
+
+.project_name{
+    font-size: larger;
+    color: brown;
+    margin: 8px;
+    width: 15% ;
+}
+.project_desc{
+    width: 85%;
+    height: fit-content;
+    overflow-wrap: normal;
+    border: solid;
+    border-radius: 10px;
+    margin: 8px;
+    border-color: antiquewhite;
+}
+
+.pnamedesc_container{
+    display: flex;
+    flex-direction: row;
+    margin: 8px;
+}
+.taskDiv{
+    border: solid;
+    border-color: rgb(233, 143, 33);
+    margin: 4px;
+
+}
+
+.taskContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.active{
+    display: flex;
+    flex: 1;
+    border: solid;
+    border-radius: 10px;
+    margin: 4px;
+    height: 75vh;
+    overflow: scroll;
+    flex-direction: column;
+
+}
+.backlog{
+    display: flex;
+    flex: 1;
+    border: solid;
+    border-radius: 10px;
+    margin: 4px;
+    height: 75vh;
+    overflow: scroll;
+    flex-direction: column;
+
+}
+.completed{
+    display: flex;
+    flex: 1;
+    border: solid;
+    border-radius: 10px;
+    margin: 4px;
+    height: 75vh;
+    overflow: scroll;
+    flex-direction: column;
+}
+
+.tasks{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border: solid;
+    border-radius: 10px;
+    margin: 4px;
+    height: 75vh;
+    overflow: scroll;
+}
+
+#task_form{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border-style: none;
+    height: fit-content;
+}

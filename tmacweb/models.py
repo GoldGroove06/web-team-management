@@ -22,6 +22,20 @@ class Tasks(models.Model):
     last_date = models.DateTimeField()
     user = models.CharField(max_length=64,default=None)
     priority = models.CharField(max_length=20)
+    status = models.CharField(max_length=20,default="tasks")
     
+    def serialize(self):
+        return{
+            "task_id":self.task_id,
+            "task":self.task,
+            "task_info":self.task_info,
+            "date_created":self.date_created,
+            "last_date":self.last_date,
+            "user":self.user,
+            "priority":self.priority,
+            "status":self.status,
 
+
+
+        }  
 
