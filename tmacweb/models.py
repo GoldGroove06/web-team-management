@@ -10,7 +10,7 @@ class Projects(models.Model):
     team_leader = models.CharField(max_length=64)
 
 class members(models.Model):
-    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='pj_id')
     user = models.CharField(max_length=64)
 
 class Tasks(models.Model):
@@ -23,7 +23,7 @@ class Tasks(models.Model):
     user = models.CharField(max_length=64,default=None)
     priority = models.CharField(max_length=20)
     status = models.CharField(max_length=20,default="tasks")
-    
+    sub_late = models.BooleanField(default=False)
     def serialize(self):
         return{
             "task_id":self.task_id,

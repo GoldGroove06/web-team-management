@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     page_render();
    taskfetch();
-   console.log(user_id)
+   
 })
 
 function page_render(){
@@ -58,29 +58,61 @@ function taskfetch(){
              
             if (data.tasks[i].status == "tasks"){
                 icon.className = "bi bi-arrow-right-circle";
+                icon.id = `${data.tasks[i].task_id}`;
             }
             else if (data.tasks[i].status == "active"){
                 icon.className = "bi bi-check-square";
+                icon.id = `${data.tasks[i].task_id}`;
             }
             else if (data.tasks[i].status == "completed"){
                 icon.className = "bi bi-check-square-fill";
+                icon.id = `${data.tasks[i].task_id}`;
             }
             else if (data.tasks[i].status == "backlog") {
                 icon.className = "bi bi-check-square";
+                icon.id = `${data.tasks[i].task_id}`;
                 icon.style.color = "red";
             }
-
-            icon.setAttribute("data_id",`${data.tasks[i].task_id}`)
-            icon.setAttribute("data-status",`${data.tasks[i].status}` )
-            icon.setAttribute("onclick", "taskChange()")
+            let stat = data.tasks[i].status
+            let id = data.tasks[i].task_id
+            
+            icon.setAttribute("onclick", `taskChange('${stat}', ${id})`);
+            
             el.appendChild(icon)
             el.innerHTML +=` <b>${data.tasks[i].task}</b>  <br> ${data.tasks[i].task_info} `
+            if (data.tmleader == user_id){
+                el.innerHTML += `task of ${data.tasks[i].user}`
+            }
+
             document.querySelector(`.${data.tasks[i].status}`).append(el);    
 
         }
     })
 }
 
-function taskChange(){
-    console.log("Arsh")
+function taskChange(stat,id){
+    
+    console.log(stat)
+    console.log(id)
+    fetch(`/taskstatus/${id}/${stat}`,{
+        method:"PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token 
+        },
+        
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data['m'] == 's'){
+            const el = document.querySelector(`#${id}`);
+            document.querySelector(`.${stat}`).removeChild(el);
+            document.querySelector(`${data["nstat"]}`).appendChild(el);
+            
+            
+        }
+        
+        })
+        location.reload();
+        
 }

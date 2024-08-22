@@ -34,10 +34,6 @@
 </div>
 
 
-<div class="members">
-    
-
-</div>
 
 <button type="button" class="btn btn-primary" id = "btn-sds"data-toggle="modal" data-target="#myModal" style="display: none;">
             
@@ -58,7 +54,11 @@
         <div class="modal-body">
             <form method="post" action="/newmember/{{id}}" class="inactive" id="member_form">
                 {% csrf_token %} 
-               
+                <div class="members">
+    
+
+                </div>
+                
                 Member Username <input type="text" name="new_user" id="nm_user" required>
                 <input type="submit" value="Add Member" id="nm_submit">
             </form>

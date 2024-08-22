@@ -111,6 +111,9 @@ def dashboard(request):
 
 def apipl(request):
     p_list = Projects.objects.filter(team_leader = str(request.user))
+    temp = members.objects.filter(user = str(request.user))
+    
+        
     
     r_dict={}
     p= 0
@@ -122,6 +125,15 @@ def apipl(request):
         }
         r_dict[p] = temp_dict 
         p = p + 1
+    for i in temp:
+        temp_dict ={
+            "project_id"   : i.project_id.project_id,
+            "project_name" : i.project_id.project_name,
+            "project_info" : i.project_id.project_info, 
+        }
+        r_dict[p] = temp_dict
+        p = p + 1
+
 
 
     
@@ -231,12 +243,32 @@ def taskfetch(request):
 
 def taskapi(request, id):
     project = Projects.objects.get(project_id = id)
-    tasks = Tasks.objects.filter(project_id = project, user = str(request.user))
+    if project.team_leader == str(request.user):
+        tasks = Tasks.objects.filter(project_id = project)
+    else :
+        tasks = Tasks.objects.filter(project_id = project, user = str(request.user))
     r_dict={}
+    r_dict["tmleader"] = project.team_leader
     r_dict["tasks"] = [task.serialize() for task in tasks]
     return JsonResponse(r_dict, status= 200)
     
     
 def taskstatus(request,id,stat):
+    
     if request.method== "PUT":
-        print("hello")
+        task = Tasks.objects.get(task_id = id, user = str(request.user))
+        nstat = ''
+        if stat == "tasks":
+            nstat = "active"
+            task.status = nstat
+        elif stat == "active":
+            nstat = "completed"
+            task.status =  nstat
+        elif stat == "backlog":
+            nstat = "completed"
+            task.status =  nstat 
+            task.sub_late = True
+        task.save()
+
+        
+        return JsonResponse({"m":"s", "nstat":nstat}, status = 200)
