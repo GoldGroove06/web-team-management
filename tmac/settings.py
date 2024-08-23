@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-__*82p^-s7v=394mvhko*ra7+=l_t39h)bq9uxdajtz!-#pjae
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0",'web-team-management.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -125,6 +125,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "tmacweb.User" 
-CSRF_TRUSTED_ORIGINS = ['https://web-team-management.onrender.com']
-
 

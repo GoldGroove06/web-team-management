@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+import json
 
 priority_choices=(
     ("L", "Low"),
@@ -173,19 +174,23 @@ def apiproject(request, id):
 
 def newmember(request, pid):
     if request.method == "POST":
-        print(request.body)
+        data = json.loads(request.body)
+        print(data["nm"])
         try:
-            User.objects.get(username = request.POST["new_user"])
+            User.objects.get(username = data["nm"])
         except User.DoesNotExist:
             messages.success(request, "User Doesn't exist")
-            return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
-
+            return JsonResponse({"m":"u"}, status = 200)
         p = Projects.objects.get(project_id = pid)
-        members.objects.create(
-            project_id = p,
-            user = request.POST["new_user"],
-        )
-        return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
+        try:
+            members.objects.get(project_id = p, user = data["nm"])
+            return JsonResponse({"m":"a"}, status = 200)
+        except members.DoesNotExist:
+            members.objects.create(
+                project_id = p,
+                user = data["nm"],
+            )
+            return JsonResponse({"m":"s"}, status = 200)
 
         
         

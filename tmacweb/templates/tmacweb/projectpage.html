@@ -52,8 +52,8 @@
         {{ message }}
         <!-- Modal body -->
         <div class="modal-body">
-            <form method="post" action="/newmember/{{id}}" class="inactive" id="member_form">
-                {% csrf_token %} 
+                <div id = "member_form" class="inactive">
+                    <div id = "nm_message"></div>
                 <div class="members">
     
 
@@ -61,7 +61,7 @@
                 
                 Member Username <input type="text" name="new_user" id="nm_user" required>
                 <input type="submit" value="Add Member" id="nm_submit">
-            </form>
+            </div>
             <form method="post" action="/newtask/{{id}}" class="inactive" id="task_form">
                 {{ task_form }}
                 {% csrf_token %}
@@ -77,10 +77,11 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id = "modalclose-btn" data-dismiss="modal">Close</button>
         </div>
 
     </div>
+    
     </div>
 
 {% endblock %}

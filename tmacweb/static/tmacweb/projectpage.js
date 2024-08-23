@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     page_render();
-   taskfetch();
+    taskfetch();
+    document.querySelector("#nm_submit").addEventListener("click", function(){nmsubmit()})
    
 })
 
@@ -115,4 +116,43 @@ function taskChange(stat,id){
         })
         location.reload();
         
+}
+
+function nmsubmit(){
+    let nm = document.querySelector("#nm_user").value
+    fetch(`/newmember/${passing}`,{
+        method:"POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token 
+        },
+        body:JSON.stringify({
+            "nm":nm
+        })
+
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        if (data["m"] == "s"){
+            document.querySelector("#nm_message").innerHTML = "Added new member"
+            setTimeout(() => {
+                document.querySelector("#nm_message").innerHTML = ""
+            }, 5000);
+
+        }
+        else if (data["m"] == "u"){
+            document.querySelector("#nm_message").innerHTML = "Enter valid username"
+            setTimeout(() => {
+                document.querySelector("#nm_message").innerHTML = ""
+            }, 5000);
+        }
+        else if (data["m"] == "a"){
+            document.querySelector("#nm_message").innerHTML = "User already added"
+            setTimeout(() => {
+                document.querySelector("#nm_message").innerHTML = ""
+            }, 5000);
+        }
+    })
+    
 }
