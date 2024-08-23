@@ -125,6 +125,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "tmacweb.User" 
-CSRF_TRUSTED_ORIGINS = ["0.0.0.0",'web-team-management.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://web-team-management.onrender.com']
 
 
