@@ -12,7 +12,9 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 import json
+from datetime import datetime
 
+from django.utils import timezone
 priority_choices=(
     ("L", "Low"),
     ("N", "Normal"),
@@ -20,15 +22,15 @@ priority_choices=(
 )
 
 class new_task_form(forms.Form):
-    task = forms.CharField(max_length=64)
-    task_info = forms.CharField(max_length=200)
-    last_date = forms.DateTimeField( input_formats=['%Y-%m-%d %H:%M:%S'], 
+    taskName = forms.CharField(max_length=64 )
+    taskDesc = forms.CharField(max_length=200)
+    lastDate = forms.DateTimeField( input_formats=['%Y-%m-%d %H:%M:%S'], 
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
-    user = forms.CharField(max_length=64)
+    taskUser = forms.CharField(max_length=64)
     priority = forms.ChoiceField(choices=priority_choices)
 
     def clean_user(self):
-        user = self.cleaned_data.get("user")
+        user = self.cleaned_data.get("taskUser")
         if not User.objects.filter(username=user).exists():
             raise ValidationError("User doesn't exist")
         return user
@@ -94,7 +96,8 @@ def createproject(request):
         Projects.objects.create(
             project_name = request.POST["projectname"],
             project_info = request.POST["projectdesc"],
-            team_leader = str(request.user)
+            team_leader = str(request.user),
+            project_deadline = request.POST["projectdeadline"],
         )
       
         
@@ -145,13 +148,14 @@ def apiproject(request, id):
     project = Projects.objects.get(project_id = id)
     members_list = members.objects.filter(project_id = project)
     task_list = Tasks.objects.filter(project_id = project)
-    print(members_list, task_list)
+
     r_dict= {}
     temp_dict ={
             "project_id"   : project.project_id,
             "project_name" : project.project_name,
             "project_info" : project.project_info, 
             "project_user" : project.team_leader,
+            "project_deadline" : project.project_deadline
         }
     r_dict["project"] = temp_dict
     m_list = []
@@ -194,15 +198,42 @@ def newmember(request, pid):
 
         
         
+
 def newtask(request,pid):
     if request.method == "POST":
-       form = new_task_form(request.POST)
-       if form.is_valid():
-        return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
-       else :
-           error_message = "User Doesn't exist"
-           return HttpResponseRedirect(reverse("projectpage", kwargs={'id': pid}))
-       
+        
+        data = json.loads(request.body)
+        
+        user = data["taskUser"]
+        try:
+            User.objects.get(username = user)
+        except User.DoesNotExist:
+            messages.success(request, "User Doesn't exist")
+            return JsonResponse({"m":"u"}, status = 200)
+           
+        date, time = data["lastDate"].split("T")
+        date_str = f"{date} {time}"
+        dt = datetime.now().strftime("%Y-%m-%d %H:%M")
+        if date_str < dt :
+            return JsonResponse({"m":"d"}, status = 200)
+        p = Projects.objects.get(project_id = pid)   
+        
+        
+        aware_datetime = timezone.make_aware(datetime.strptime(date_str, "%Y-%m-%d %H:%M"), timezone=timezone.get_current_timezone())
+        
+        Tasks.objects.create(
+            task = data["taskName"],
+            task_info = data["taskDesc"],
+            last_date = aware_datetime,
+            user = data["taskUser"],
+            priority = data["priority"],
+            project_id = p
+
+        )
+        return JsonResponse({"m":"s"}, status = 200)
+
+    
+      
 
 
 def taskfetch(request):
@@ -261,7 +292,9 @@ def taskapi(request, id):
 def taskstatus(request,id,stat):
     
     if request.method== "PUT":
+        print(id, str(request.user), stat)
         task = Tasks.objects.get(task_id = id, user = str(request.user))
+        print(task)
         nstat = ''
         if stat == "tasks":
             nstat = "active"
@@ -277,3 +310,10 @@ def taskstatus(request,id,stat):
 
         
         return JsonResponse({"m":"s", "nstat":nstat}, status = 200)
+    
+def removemember(request, id, username):
+    if request.method == "PUT":
+        p = Projects.objects.get(project_id = id)
+        member = members.objects.get(project_id = p, user = username)
+        member.delete()
+        return JsonResponse({"m":"s"}, status = 200)

@@ -1,0 +1,48 @@
+.createproject-container{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+
+}
+
+.createproject-form{
+    width: 40%;
+    
+
+    height: 70vh;
+   
+    padding: 32px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(114, 59, 187);
+    
+    
+}
+.createproject-obj{
+    padding: 8px;
+    margin: 4px;
+    height: 32px;
+    width:80%;
+    border-radius: 6px;
+    border-style: solid; 
+    outline: none;
+
+}
+
+.btn{
+
+    float: inline-end;
+}
+
+.desc{
+    height: 30%;
+}
+
+.form-hr {
+    margin-top: 10vh;
+    width: 90%; 
+    margin: auto;
+    
+}

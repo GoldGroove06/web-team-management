@@ -13,7 +13,7 @@
     width: 15% ;
 }
 .project_desc{
-    width: 85%;
+    width: 80%;
     height: fit-content;
     overflow-wrap: normal;
     border: solid;
@@ -31,6 +31,7 @@
     border: solid;
     border-color: rgb(233, 143, 33);
     margin: 4px;
+    
 
 }
 
@@ -39,53 +40,129 @@
     flex-direction: row;
 }
 
-.active{
-    display: flex;
+.tasks, .active, .completed, .backlog {
+   
     flex: 1;
     border: solid;
     border-radius: 10px;
     margin: 4px;
-    height: 75vh;
-    overflow: scroll;
+    height: 78vh;
+    
     flex-direction: column;
 
 }
-.backlog{
-    display: flex;
-    flex: 1;
-    border: solid;
-    border-radius: 10px;
-    margin: 4px;
-    height: 75vh;
-    overflow: scroll;
-    flex-direction: column;
 
-}
-.completed{
-    display: flex;
-    flex: 1;
-    border: solid;
-    border-radius: 10px;
-    margin: 4px;
-    height: 75vh;
-    overflow: scroll;
-    flex-direction: column;
-}
 
-.tasks{
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    border: solid;
-    border-radius: 10px;
-    margin: 4px;
-    height: 75vh;
-    overflow: scroll;
+.tasks-scroll, .active-scroll, .completed-scroll, .backlog-scroll {
+    display: block;
+    height: 82%;
+    overflow-y: scroll ;
+    
+    border-radius: 15px;
 }
 
 #task_form{
     overflow-y: hidden;
     overflow-x: hidden;
     border-style: none;
+    border-radius: 0%;
+    height: fit-content;
+    width: 100%;
+}
+
+.taskDiv{
+    display: flex;
+    flex-direction: column;
+    
+   
+   
+}
+
+.taskbody{
+    margin-left: 4px;
+}
+
+.taskuser{
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: small;
+    color: rgb(126, 125, 125);
+    
+    
+}
+
+.taskhr {
+  
+    width: 90%; 
+    margin: auto;
+    
+}
+
+.taskdata{
+    width: 100%;
+    
+}
+
+.member-div{
+    margin: 4px;
+    padding: 4px;
+}
+
+.add-member-box{
+    margin: 4px;
+    padding: 4px;
+}
+
+.member-btn{
+    float: right;
+}
+
+#nm_user{
+    width:70%;
+}
+
+
+#member_form{
+    border: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
     height: fit-content;
 }
+
+.modal-title{
+    margin-left:11px
+}
+
+.members{
+    overflow-y: scroll;
+    height: 80%
+}
+
+.lastdate{
+    float: right;
+}
+
+.task-btn{
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    outline: none;
+    border-style: none;
+    padding: 4px;
+    margin: 2px;
+    
+}
+
+.member-add-btn{
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    outline: none;
+    border-style: none;
+    padding: 4px;
+    margin: 2px;
+    font-size: small;
+}
+

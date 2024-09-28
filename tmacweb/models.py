@@ -8,6 +8,7 @@ class Projects(models.Model):
     project_name = models.CharField(max_length=64)
     project_info = models.CharField(max_length=200)
     team_leader = models.CharField(max_length=64)
+    project_deadline = models.DateField( default ="2022-12-31 23:59:59")
 
 class members(models.Model):
     project_id = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='pj_id')

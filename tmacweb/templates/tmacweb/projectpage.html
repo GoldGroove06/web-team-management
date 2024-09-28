@@ -9,33 +9,47 @@
 <div class="project_desc">
 
 </div>
+<div class="project_deadline" > 21/8/2024</div>
 <div class="am-btn-div"></div>
 
 </div>
 <div class="taskContainer">
     <div class="tasks">
-        <h2>Project Tasks</h2>
-        <div class="btn-div">
+        <h2>Project Tasks</h2><span class="btn-div" ></span>
             
-        </div>
+
+            <span class="tasks-scroll">
+            </span>
         
     </div>
     
     <div class="active">
         <h2>active</h2>
+
+            <span class="active-scroll">
+            </span>
+        
         
     </div>
     <div class="completed">
         <h2>completed</h2>
+
+            <span class="completed-scroll">
+            </span>
+        
+        
     </div>
     <div class="backlog">
        <h2>backlog</h2> 
+
+        <span class="backlog-scroll">
+        </span>
     </div>
 </div>
 
 
 
-<button type="button" class="btn btn-primary" id = "btn-sds"data-toggle="modal" data-target="#myModal" style="display: none;">
+<button type="button" class="btn btn-primary" id = "btn-sds" data-toggle="modal" data-target="#myModal" style="display: none;">
             
 </button>
 
@@ -52,23 +66,53 @@
         {{ message }}
         <!-- Modal body -->
         <div class="modal-body">
+            <div id = "nm_message"></div>
                 <div id = "member_form" class="inactive">
-                    <div id = "nm_message"></div>
-                <div class="members">
-    
-
+                    
+                
+                
+                <label style="color: grey;margin: 8px;">Member Username </label>    
+                <div class="add-member-box">
+                    
+                <input type="text" name="new_user" id="nm_user" required>
+                <input type="submit" value="Add Member" id="nm_submit">
                 </div>
                 
-                Member Username <input type="text" name="new_user" id="nm_user" required>
-                <input type="submit" value="Add Member" id="nm_submit">
+                <div class="members">
+                    <label style="color: grey;margin: 8px;"> Members</label>
+
+                </div>
             </div>
-            <form method="post" action="/newtask/{{id}}" class="inactive" id="task_form">
-                {{ task_form }}
+            <form method="post"  class="inactive" id="task_form">
                 {% csrf_token %}
+                Task Name: <input type="text" name="taskName" id="taskName" required>
+                Task Description: <textarea name="taskDesc" id="taskDesc" required></textarea>
+                Last Date: <input type="datetime-local" name="lastDate" id="lastDate" required>
+                User: <input type="text" name="taskUser" id="taskUser" required>
+                <fieldset>
+                    Select Priority :
+                  
+                    <div>
+                      <input type="radio" class="priority" name="priority" value="low"  />
+                      <label >Low</label>
+                    </div>
+                  
+                    <div>
+                      <input type="radio" class="priority" name="priority" value="normal" checked/>
+                      <label >Normal</label>
+                    </div>
+                  
+                    <div>
+                      <input type="radio" class="priority" name="priority" value="high" />
+                      <label >High</label>
+                    </div>
+                  </fieldset>
+                  
+                
                 
           
     
-                <button type="submit">Add Task</button> 
+                <input type="submit" id="nt_submit" value="Add Task">
                 
             
             </form>

@@ -1,11 +1,22 @@
 {% extends "tmacweb/layout.html" %}
+{% load static %}
 
 {% block body %}
-<form method="post" action={% url 'createproject' %} > 
+<div class="createproject-container">
+<form method="post" action={% url 'createproject' %} class="createproject-form"> 
     {% csrf_token %}
-    Project Name: <input type="text" name="projectname" > <br>
-    Description: <input type="text" name="projectdesc"><br>
-    <input type="submit">
-
+    <h4>Project Name:</h4> <input type="text" name="projectname" required class="createproject-obj"> <br>
+    <h4>Description:</h4> <textarea type="text" name="projectdesc" required class="createproject-obj desc" ></textarea><br>
+    <h4>Project Deadline:</h4> <input type="date" name="projectdeadline" required class="createproject-obj"><br>
+    
+    <hr class= "from-hr" >
+    <button type="submit" class="btn btn-success" class="createproject-btn btn">Create Project</button>
+    
 </form>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <link href="{% static 'tmacweb/createproject.css' %}" rel="stylesheet">   
 {% endblock %}
