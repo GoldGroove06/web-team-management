@@ -1,7 +1,7 @@
 #container{
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 90vh;
 }
 
 #calendar{
@@ -53,3 +53,17 @@
 .active{
     display: block;
 }
+
+.members{
+    border-color: black;
+    border-style: solid;
+    margin:10px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.member-div{
+    margin: 4px;
+    padding: 4px;
+}
+

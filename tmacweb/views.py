@@ -105,9 +105,20 @@ def createproject(request):
     return render(request, "tmacweb/createproject.html")
 
 def projectpage(request, id):
-    return render(request, "tmacweb/projectpage.html",{
-        "id":id, "task_form":new_task_form, "error" : error_message
-    })
+    p = Projects.objects.get(project_id = id)
+    if p.team_leader == str(request.user):
+        return render(request, "tmacweb/projectpage.html",{
+                "id":id
+            })
+    if members.objects.filter(project_id = p, user = str(request.user)).exists():
+            return render(request, "tmacweb/projectpage.html",{
+                "id":id
+            })
+    else:
+            return render(request, "tmacweb/forbidden.html",{
+                
+            })
+    
 
 
 def dashboard(request):
@@ -168,9 +179,28 @@ def apiproject(request, id):
         task_temp["task_id"] = i.task_id
         task_temp["task"] = i.task
         task_temp["task_info"] = i.task_info
+        
         tasktemp2.append(task_temp)
     r_dict["tasks"] = tasktemp2
-        
+    
+    p_list={}
+    active = Tasks.objects.filter(project_id = project, status = "active").count()
+    completed = Tasks.objects.filter(project_id = project, status = "completed").count()
+    backlog = Tasks.objects.filter(project_id = project, status = "backlog").count()
+    tasks = Tasks.objects.filter(project_id = project, status = "tasks").count()
+    print(completed)
+    percentage = (int(completed)  / task_list.count()) * 100
+    if completed == 0:
+        percentage = 0
+    print(round(percentage))
+    p_list["active"] = active
+    p_list["completed"] = completed
+    p_list["backlog"] = backlog
+    p_list["tasks"] = tasks
+    p_list["percentage"] = round(percentage)
+
+    r_dict["progress"] = p_list
+    
 
 
 
@@ -292,9 +322,10 @@ def taskapi(request, id):
 def taskstatus(request,id,stat):
     
     if request.method== "PUT":
-        print(id, str(request.user), stat)
-        task = Tasks.objects.get(task_id = id, user = str(request.user))
-        print(task)
+       
+        task = Tasks.objects.get(task_id = id)
+        
+        
         nstat = ''
         if stat == "tasks":
             nstat = "active"

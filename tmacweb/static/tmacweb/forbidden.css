@@ -1,0 +1,12 @@
+.forbidden {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    font-size: 24px; 
+}
+
+.bi-lock {
+    font-size: 50px;
+}

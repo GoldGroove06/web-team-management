@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("task_form");
 
     form.addEventListener("submit",function(event) {ntsubmit(event)})
+    let toastEl = document.querySelector('.toast');
+    let toast = new bootstrap.Toast(toastEl);
+    
 
    
 })
@@ -21,7 +24,7 @@ function page_render(){
         document.querySelector(".project_name").innerHTML=`<b>${data.project.project_name}</b>`
         document.querySelector(".project_desc").innerHTML=`${data.project.project_info}`
         
-        document.querySelector(".project_deadline").innerHTML=`<button type="button" class="btn btn-info">${data.project.project_deadline}</button>`
+        document.querySelector(".project_deadline").innerHTML=`<div class="btn btn-info pd_info">${data.project.project_deadline}</div>`
         if (data.project.project_user == user_id){
             document.querySelector(".am-btn-div").innerHTML ='<button type="button"  onclick="member_add()" class = "member-add-btn">Edit members</button>'
             document.querySelector(".btn-div").innerHTML = '<button type="button"  onclick="task_add()" class = "task-btn">Add Task</button>'
@@ -168,28 +171,27 @@ function nmsubmit(){
     })
     .then(response => response.json())
     .then(data => {
+        let toastEl = document.querySelector('.toast');
+        let toast = new bootstrap.Toast(toastEl);
         
         if (data["m"] == "s"){
-            document.querySelector("#nm_message").innerHTML = "Added new member"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-                location.reload();
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "Added new member"
+            document.querySelector("#modalclose-btn").click()
+            toast.show();
+            internal_refresh()
+
+            
 
         }
         else if (data["m"] == "u"){
-            document.querySelector("#nm_message").innerHTML = "Enter valid username"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-                
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "Enter a valid user"
+            toast.show();
+            
         }
         else if (data["m"] == "a"){
-            document.querySelector("#nm_message").innerHTML = "User already added"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-                
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "User already added"
+            toast.show();
+            
         }
 
     })
@@ -217,26 +219,24 @@ function ntsubmit(event){
         })
     .then(response => response.json())
     .then(data => {
-        console.log("return")
+        let toastEl = document.querySelector('.toast');
+        let toast = new bootstrap.Toast(toastEl);
         if (data["m"] == "s"){
-            document.querySelector("#nm_message").innerHTML = "Task added successfully"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-                location.reload();
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "Task added successfully"
+            document.querySelector("#modalclose-btn").click()
+            toast.show();
+            internal_refresh()
 
         }
         else if (data["m"] == "u"){
-            document.querySelector("#nm_message").innerHTML = "User does not exist"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "User does not exist"
+            toast.show();
+            
         }
         else if (data["m"] == "d"){
-            document.querySelector("#nm_message").innerHTML = "Enter a future date"
-            setTimeout(() => {
-                document.querySelector("#nm_message").innerHTML = ""
-            }, 5000);
+            document.querySelector(".toast-body").innerHTML = "Enter a future date"
+            toast.show();
+           
         }
     })
 }
@@ -252,4 +252,23 @@ function member_remove(username){
         },
         
     })
+    .then( () => {document.querySelector(".toast-body").innerHTML = "User removed successfully";
+        let toastEl = document.querySelector('.toast');
+        let toast = new bootstrap.Toast(toastEl);
+        document.querySelector("#modalclose-btn").click();
+        toast.show();
+        internal_refresh();}
+    )
+}
+
+
+function internal_refresh(){
+
+    document.querySelector(".members").innerHTML = '<label style="color: grey;margin: 8px;"> Members</label>'
+    document.querySelector(`.active-scroll`).innerHTML=''
+    document.querySelector(`.completed-scroll`).innerHTML=''
+    document.querySelector(`.backlog-scroll`).innerHTML=''
+    document.querySelector(`.tasks-scroll`).innerHTML=''
+    page_render();
+    taskfetch();
 }

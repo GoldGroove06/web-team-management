@@ -62,12 +62,14 @@
 }
 
 #task_form{
+    
     overflow-y: hidden;
     overflow-x: hidden;
     border-style: none;
     border-radius: 0%;
     height: fit-content;
     width: 100%;
+    
 }
 
 .taskDiv{
@@ -129,6 +131,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     height: fit-content;
+    
 }
 
 .modal-title{
@@ -166,3 +169,77 @@
     font-size: small;
 }
 
+.pd_info{
+    font-size: small;
+    width: max-content;
+    margin-top:8px ;
+    
+    
+
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+  .pnamedesc_container, .taskContainer {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+  }
+
+  .project_name, .project_desc {
+      width: 90%;
+      text-align: center;
+      margin: 8px auto;
+  }
+
+  .tasks, .active, .completed, .backlog {
+      width: 100%;
+      margin: 4px 0;
+      height: auto;
+  }
+
+  .tasks-scroll, .active-scroll, .completed-scroll, .backlog-scroll {
+      height: auto;
+      max-height: 400px;
+  }
+
+  .taskDiv {
+      width: 100%;
+  }
+
+  .member-btn {
+      float: none;
+      margin: 8px 0;
+  }
+}
+
+.ml-2{
+    padding-left: 200px;
+}
+
+.toast-header{
+    display: flex;
+    justify-content: end;
+}
+
+.toast {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    z-index: 1050;
+}
+
+
+.input-box{
+    width: 99%;
+    margin: 4px;
+    padding: 8px;
+    height: 32px;
+}
+
+#taskDesc{
+    height: max-content;
+}

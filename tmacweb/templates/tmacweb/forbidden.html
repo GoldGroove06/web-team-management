@@ -1,0 +1,15 @@
+{% extends "tmacweb/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="forbidden">
+    <i class="bi bi-lock"></i><br><br>
+    <b>Sorry you are not allowed to access this page</b>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'tmacweb/forbidden.css' %}" rel="stylesheet">   
+{% endblock %}`

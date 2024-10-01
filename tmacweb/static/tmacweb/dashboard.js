@@ -14,7 +14,7 @@ function calendar_render() {
   
   events_list =[]
   for (let i = 0; i < data.team_tasks.length; i++) {
-    console.log(data.team_tasks[i])
+  
     let [date, time] = data.team_tasks[i].last_date.split("T")
     
     events_list.push(
@@ -44,11 +44,12 @@ function calendar_render() {
         )
           }
     
-  console.log(events_list)
+
   let calendarEl = document.getElementById('calendar');
   let calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       events: events_list,
+      
       
       eventClick: function (info) {
         document.querySelector(".modal-title").innerHTML = `${info.event.title}`
@@ -81,7 +82,7 @@ fetch("/projectlistapi",{
     const childdiv = document.createElement("div");
     childdiv.setAttribute("data-key", data[i].project_id);
     childdiv.className = "listdiv"
-    childdiv.innerHTML = `${data[i].project_name} <br>${data[i].project_info} `;
+    childdiv.innerHTML = `${data[i].project_name} <br> `;
 
     document.querySelector("#projects").append(childdiv);
     
@@ -113,19 +114,26 @@ function project_modal(element) {
   })
   .then(response => response.json())
   .then(data => {
+    document.querySelector(".task_info").innerHTML=''
     document.querySelector(".modal-title").innerHTML = `<a href="project/${t}">${data.project.project_name}</a>`
     
-    document.querySelector(".taskContainer").innerHTML = " "
-    document.querySelector(".membersContainer").innerHTML = " "
+    document.querySelector(".members").innerHTML = '<label style="color: grey;margin: 8px;"> Members</label>'
+    document.querySelector(".task_info").innerHTML=`${data.project.project_info}`
+    document.querySelector(".project_deadline").innerHTML=`<div class="btn btn-info pd_info">${data.project.project_deadline}</div>`
+    document.querySelector(".progress-bar").innerHTML=`${data.progress.percentage}%`
+    document.querySelector(".progress-bar").style.width=`${data.progress.percentage}%`
 
-    for (let i = 0; i < data.tasks.length; i++){
-      
-      const el = document.createElement("div").innerHTML=` ${data.tasks[i].task}   ${data.tasks[i].task_info}`
-      document.querySelector(".taskContainer").append(el);
-    }
+    document.querySelector(".stats").innerHTML = `Active tasks: ${data.progress.active}<br>
+    Completed tasks: ${data.progress.completed}<br>
+    Backlog tasks: ${data.progress.backlog}<br>
+    Pending tasks: ${data.progress.tasks}`
     for (let i = 0; i < data.members.length; i++){
-      document.querySelector(".membersContainer").append(data.members[i])
-    }
+      member_div = document.createElement("div")
+      member_div.className = "member-div"
+      member_div.innerHTML = `<b>${data.members[i]}</b>`
+      document.querySelector(".members").append(member_div)
+      }
+   
     document.querySelector("#calendarTask").className = "inactive"
     document.querySelector("#ProjectContainer").className = "active"
     document.querySelector("#btn-sds").click();
@@ -135,7 +143,3 @@ function project_modal(element) {
 
 }
 
-function redirect() {
-   window.location.href = "/project/1"
-   member_add()
-}

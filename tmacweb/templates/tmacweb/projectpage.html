@@ -1,7 +1,7 @@
 {% extends "tmacweb/layout.html" %}
 {% load static %}
 {% block body %}
-
+<div>{{error}}</div>
 <div class="pnamedesc_container">
 <div class="project_name">
 
@@ -15,7 +15,8 @@
 </div>
 <div class="taskContainer">
     <div class="tasks">
-        <h2>Project Tasks</h2><span class="btn-div" ></span>
+        <h2>Project Tasks</h2>
+        <div class="btn-div" ></div>
             
 
             <span class="tasks-scroll">
@@ -24,7 +25,7 @@
     </div>
     
     <div class="active">
-        <h2>active</h2>
+        <h2>Active Tasks</h2>
 
             <span class="active-scroll">
             </span>
@@ -32,7 +33,7 @@
         
     </div>
     <div class="completed">
-        <h2>completed</h2>
+        <h2>Completed Tasks</h2>
 
             <span class="completed-scroll">
             </span>
@@ -40,7 +41,7 @@
         
     </div>
     <div class="backlog">
-       <h2>backlog</h2> 
+       <h2>Backlog Tasks</h2> 
 
         <span class="backlog-scroll">
         </span>
@@ -52,7 +53,16 @@
 <button type="button" class="btn btn-primary" id = "btn-sds" data-toggle="modal" data-target="#myModal" style="display: none;">
             
 </button>
-
+<div class="toast" role="alert" aria-atomic="true" aria-hidden="false" data-delay="5000">
+    <div class="toast-header">
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      
+    </div>
+  </div>
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -85,10 +95,10 @@
             </div>
             <form method="post"  class="inactive" id="task_form">
                 {% csrf_token %}
-                Task Name: <input type="text" name="taskName" id="taskName" required>
-                Task Description: <textarea name="taskDesc" id="taskDesc" required></textarea>
-                Last Date: <input type="datetime-local" name="lastDate" id="lastDate" required>
-                User: <input type="text" name="taskUser" id="taskUser" required>
+                Task Name:<br> <input type="text" name="taskName" id="taskName" required class="input-box"><br>
+                Task Description:<br> <textarea name="taskDesc" id="taskDesc" required class="input-box"></textarea><br>
+                Last Date:<br> <input type="datetime-local" name="lastDate" id="lastDate" required class="input-box"><br>
+                Task assignee:<br> <input type="text" name="taskUser" id="taskUser" required class="input-box"><br>
                 <fieldset>
                     Select Priority :
                   
@@ -138,6 +148,7 @@
     let user_id =  "{{user.username}}"
     </script>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{% static 'tmacweb/projectpage.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
