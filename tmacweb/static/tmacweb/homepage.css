@@ -1,0 +1,50 @@
+body {
+    background: linear-gradient(145deg, #121223, #1b1b33, #252545);
+    color: #ffffff;
+    
+
+}
+.dashboard-img{
+    margin:5%;
+    width: 90%;
+    height: 90%;
+    border-radius:12px ;
+    border: 2px solid #BB86FC;
+    box-shadow: 4px 8px 14px rgba(0, 0, 0, 0.9);
+    
+}
+
+.heading{
+    color: #ffffff;
+    text-align: center;
+    padding: 4px;
+    padding-top: 5%;
+    font-size: 68px;
+    
+}
+.sub-text{
+    color:  #BB86FC;
+    text-align: center;
+    
+
+}
+
+.btn-homepage{
+    
+    background-color: #BB86FC;
+    color: #ffffff;
+    
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    height: 36px;
+   
+  
+}
+
+@media only screen and (max-width: 1000px){
+    .heading{
+        font-size: 48px;
+        margin-top: 8%;
+    }
+}

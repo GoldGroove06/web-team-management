@@ -1,4 +1,16 @@
 {% extends "tmacweb/layout.html" %}
+{% load static %}
 {% block body %}
-Hello world!!
+
+<div class="heading" ><b>Get More Done<br> as a Team</b></div>
+<div class="sub-text">
+    <p>Turn goals into reality with smart task tracking <br>and team coordination.</p>
+<button type="button"  onclick="location.href = '\ register'" class="btn-homepage">Get Started</button>
+</div>
+<img src="{% static 'tmacweb/dashboard.png' %}"  class="dashboard-img">
+
+{% endblock %}
+
+{% block script %}
+    <link href="{% static 'tmacweb/homepage.css' %}" rel="stylesheet">   
 {% endblock %}

@@ -5,12 +5,12 @@
 <div class="createproject-container">
 <form method="post" action={% url 'createproject' %} class="createproject-form"> 
     {% csrf_token %}
-    <h4>Project Name:</h4> <input type="text" name="projectname" required class="createproject-obj"> <br>
-    <h4>Description:</h4> <textarea type="text" name="projectdesc" required class="createproject-obj desc" ></textarea><br>
+    <h4>Project Name:</h4> <input type="text" name="projectname" required class="createproject-obj" placeholder="Project Name"> <br>
+    <h4>Description:</h4> <textarea type="text" name="projectdesc" required class="createproject-obj desc" placeholder="Project Description"></textarea><br>
     <h4>Project Deadline:</h4> <input type="date" name="projectdeadline" required class="createproject-obj"><br>
     
-    <hr class= "from-hr" >
-    <button type="submit" class="btn btn-success" class="createproject-btn btn">Create Project</button>
+    <hr id= "form-hr" >
+    <button type="submit"  class="createproject-btn btn">Create Project</button>
     
 </form>
 </div>

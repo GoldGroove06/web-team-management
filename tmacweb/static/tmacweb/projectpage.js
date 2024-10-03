@@ -66,6 +66,7 @@ function taskfetch(){
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data.tasks.length)
         for (let i = 0; i < data.tasks.length; i++){
              const el = document.createElement("div")
             el.className = "taskDiv"

@@ -1,11 +1,33 @@
-.navbar{
-    background-color: #adad21;
-   
+#navbar-id{
+    background-color: #1E1E1E;
+    color: #BB86FC;
+    border-radius: 12px;
+    margin:8px;
 }
-.login-button{
-    display: flex;
-    align-items: center;
+
+.nav-link{
+    color: grey;
+}
+.navbar-brand{
+    color: white;
+}
+.modal-content{
+    background: linear-gradient(145deg, #121223, #1b1b33, #252545);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(145deg, #121223, #1b1b33, #252545);
+    color: #ffffff
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: #BB86FC;
 }
 
 
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(187, 134, 252, 0.8)'stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'd='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E");
+}
 

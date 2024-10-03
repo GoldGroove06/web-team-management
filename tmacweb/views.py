@@ -51,7 +51,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("homepage"))
+            return HttpResponseRedirect(reverse("dashboard"))
         else:
             return render(request, "tmacweb/login.html", {
                 "message": "Invalid username and/or password."
@@ -87,7 +87,7 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("homepage"))
+        return HttpResponseRedirect(reverse("dashboard"))
     else:
         return render(request, "tmacweb/register.html")
     
@@ -136,7 +136,8 @@ def apipl(request):
         temp_dict ={
             "project_id"   : i.project_id,
             "project_name" : i.project_name,
-            "project_info" : i.project_info, 
+            "project_info" : i.project_info,
+            "project_deadline" : i.project_deadline, 
         }
         r_dict[p] = temp_dict 
         p = p + 1

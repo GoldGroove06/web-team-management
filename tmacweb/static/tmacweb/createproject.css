@@ -9,14 +9,11 @@
 
 .createproject-form{
     width: 40%;
-    
-
     height: 70vh;
-   
     padding: 32px;
     margin: 10px;
     border-radius: 10px;
-    background-color: rgb(114, 59, 187);
+    background-color: #1E1E1E;
     
     
 }
@@ -28,21 +25,64 @@
     border-radius: 6px;
     border-style: solid; 
     outline: none;
+    background-color: transparent;
+    color: white;
 
 }
-
+.createproject-obj:focus {
+    background-color: transparent;
+    color: white;
+}
+body{
+    background-color: #1E1E1E;
+    color: #BB86FC
+}
 .btn{
-
     float: inline-end;
+    background-color: #BB86FC;
+    border-color:  #BB86FC;
+}
+.btn:hover{
+    background: linear-gradient(145deg, #121223, #1b1b33, #252545);
+    color:#BB86FC;
+    border-color:  #BB86FC;
+
+
 }
 
 .desc{
     height: 30%;
 }
 
-.form-hr {
-    margin-top: 10vh;
-    width: 90%; 
-    margin: auto;
+#form-hr {
+    border-color:  #BB86FC;
+}
+
+@media only screen and (max-width: 1000px){
+    .createproject-container{
+        display: flex;
+       
+        margin:0;
+        margin-top:20%;
+        justify-content: center;
+        align-content: center;
+        
+    }
+    .createproject-form{
+       
+        width:80%;
+        padding: 12px;
+        margin:0;
+        
+        height: min-content;
+       
+        
+    }
     
+    .createproject-obj{
+     
+        width:90%;
+        
+    
+    }
 }

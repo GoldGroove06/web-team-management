@@ -23,7 +23,10 @@ function calendar_render() {
         start:date,
         end : date,
         extendedProps:{
-          desc: data.team_tasks[i].task_info
+          desc: data.team_tasks[i].task_info,
+          ldate:date,
+          priority:data.team_tasks[i].priority,
+
         }
       }
     )
@@ -38,7 +41,9 @@ function calendar_render() {
             start:date,
             end : date,
             extendedProps:{
-              desc: data.user_tasks[i].task_info
+              desc: data.user_tasks[i].task_info,
+              ldate:date,
+              priority:data.team_tasks[i].priority,
             }
           }
         )
@@ -52,8 +57,9 @@ function calendar_render() {
       
       
       eventClick: function (info) {
-        document.querySelector(".modal-title").innerHTML = `${info.event.title}`
-        document.querySelector("#calendarTask").innerHTML = `${info.event.extendedProps.desc}`
+        console.log(info.event.extendedProps.desc)
+        document.querySelector(".modal-title").innerHTML = `${info.event.title} <br><span class="project-deadline" style="font-size: 13px">Last date: ${info.event.extendedProps.ldate}</span>`
+        document.querySelector("#calendarTask").innerHTML = `${info.event.extendedProps.desc}<br> <span class="project-deadline" style="font-size: 13px">Priority: ${info.event.extendedProps.priority}</span>`
         document.querySelector("#calendarTask").className = "active"
         document.querySelector("#ProjectContainer").className = "inactive"
         document.querySelector("#btn-sds").click();
@@ -82,7 +88,7 @@ fetch("/projectlistapi",{
     const childdiv = document.createElement("div");
     childdiv.setAttribute("data-key", data[i].project_id);
     childdiv.className = "listdiv"
-    childdiv.innerHTML = `${data[i].project_name} <br> `;
+    childdiv.innerHTML = `${data[i].project_name}  <span class="project-deadline" style="float:right">Project Deadline:<br> ${data[i].project_deadline}</span>`;
 
     document.querySelector("#projects").append(childdiv);
     
@@ -114,19 +120,19 @@ function project_modal(element) {
   })
   .then(response => response.json())
   .then(data => {
+    document.querySelector("#calendarTask").innerHTML = ``
     document.querySelector(".task_info").innerHTML=''
-    document.querySelector(".modal-title").innerHTML = `<a href="project/${t}">${data.project.project_name}</a>`
-    
-    document.querySelector(".members").innerHTML = '<label style="color: grey;margin: 8px;"> Members</label>'
-    document.querySelector(".task_info").innerHTML=`${data.project.project_info}`
-    document.querySelector(".project_deadline").innerHTML=`<div class="btn btn-info pd_info">${data.project.project_deadline}</div>`
+    document.querySelector(".modal-title").innerHTML = `<a href="project/${t}">${data.project.project_name} <i class="bi bi-box-arrow-up-right" ></i></a><br><div class="project-deadline">Project Deadline:${data.project.project_deadline}</div> `
+  
+    document.querySelector(".members").innerHTML = '<label style="margin: 8px;"> Members</label>'
+    document.querySelector(".task_info").innerHTML=`${data.project.project_info} `
+
     document.querySelector(".progress-bar").innerHTML=`${data.progress.percentage}%`
     document.querySelector(".progress-bar").style.width=`${data.progress.percentage}%`
 
-    document.querySelector(".stats").innerHTML = `Active tasks: ${data.progress.active}<br>
-    Completed tasks: ${data.progress.completed}<br>
-    Backlog tasks: ${data.progress.backlog}<br>
-    Pending tasks: ${data.progress.tasks}`
+    document.querySelector(".stats").innerHTML = `<div ><span> In Progress: ${data.progress.active}</span>  <span style="float:right" > To Do Backlog: ${data.progress.backlog}</span> </div>
+   <div><span> Done: ${data.progress.completed}</span> <span style="float:right" >  To Do: ${data.progress.tasks}</span></div>
+             `;
     for (let i = 0; i < data.members.length; i++){
       member_div = document.createElement("div")
       member_div.className = "member-div"
@@ -134,7 +140,6 @@ function project_modal(element) {
       document.querySelector(".members").append(member_div)
       }
    
-    document.querySelector("#calendarTask").className = "inactive"
     document.querySelector("#ProjectContainer").className = "active"
     document.querySelector("#btn-sds").click();
 });

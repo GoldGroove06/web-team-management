@@ -1,14 +1,14 @@
 {% extends "tmacweb/layout.html" %}
-
+{% load static %}
 {% block body %}
 
-    <h2>Register</h2>
+    <h2 style="margin: 8px;">Register</h2>
 
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'register' %}" method="post">
+    <form action="{% url 'register' %}" method="post" style="margin: 8px;">
         {% csrf_token %}
         <div class="form-group">
             <input class="form-control" autofocus type="text" name="username" placeholder="Username">
@@ -25,6 +25,10 @@
         <input class="btn btn-primary" type="submit" value="Register">
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    <span style="margin: 8px;">Already have an account? <a href="{% url 'login' %}">Log In here.</a></span>
 
+{% endblock %}
+
+{% block script %}
+    <link href="{% static 'tmacweb/loginregister.css' %}" rel="stylesheet">   
 {% endblock %}

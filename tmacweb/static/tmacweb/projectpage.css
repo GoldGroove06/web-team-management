@@ -7,8 +7,8 @@
 
 
 .project_name{
-    font-size: larger;
-    color: brown;
+    font-size: 20px;
+    color: white;
     margin: 8px;
     width: 15% ;
 }
@@ -16,10 +16,12 @@
     width: 80%;
     height: fit-content;
     overflow-wrap: normal;
-    border: solid;
+   
     border-radius: 10px;
     margin: 8px;
-    border-color: antiquewhite;
+    color: white;
+   
+    
 }
 
 .pnamedesc_container{
@@ -29,8 +31,12 @@
 }
 .taskDiv{
     border: solid;
-    border-color: rgb(233, 143, 33);
+    border-color: rgb(0, 0, 0);
     margin: 4px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    color: white;
     
 
 }
@@ -43,11 +49,12 @@
 .tasks, .active, .completed, .backlog {
    
     flex: 1;
-    border: solid;
+    border: 3px solid;
     border-radius: 10px;
     margin: 4px;
     height: 78vh;
-    
+    border-color: #000000;
+
     flex-direction: column;
 
 }
@@ -56,7 +63,7 @@
 .tasks-scroll, .active-scroll, .completed-scroll, .backlog-scroll {
     display: block;
     height: 82%;
-    overflow-y: scroll ;
+    overflow-y: auto ;
     
     border-radius: 15px;
 }
@@ -72,13 +79,8 @@
     
 }
 
-.taskDiv{
-    display: flex;
-    flex-direction: column;
-    
-   
-   
-}
+ 
+
 
 .taskbody{
     margin-left: 4px;
@@ -119,6 +121,7 @@
 
 .member-btn{
     float: right;
+    color: #5CB8E4;
 }
 
 #nm_user{
@@ -147,6 +150,10 @@
     float: right;
 }
 
+body{
+    background-color: #121212;
+    color: #BB86FC
+}
 .task-btn{
     background-color: black;
     color: white;
@@ -154,7 +161,7 @@
     outline: none;
     border-style: none;
     padding: 4px;
-    margin: 2px;
+    margin: 4px;
     
 }
 
@@ -182,11 +189,18 @@
 
 @media only screen and (max-width: 768px) {
 
-  .pnamedesc_container, .taskContainer {
+  .pnamedesc_container {
       flex-direction: column;
       align-items: center;
       justify-content: center;
       margin: 0;
+  }
+
+  .taskContainer{
+    margin:8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .project_name, .project_desc {
@@ -207,7 +221,7 @@
   }
 
   .taskDiv {
-      width: 100%;
+      width: 97%;
   }
 
   .member-btn {
@@ -238,8 +252,25 @@
     margin: 4px;
     padding: 8px;
     height: 32px;
+    background-color: transparent;
+    border: solid;
+    border-color: #ffffff;
+    border-radius: 4px;
+    border-width: 2px;
+    color: white;
+
+}
+
+.input-box:focus{
+    background-color: transparent;
+    color: white;
+    
 }
 
 #taskDesc{
     height: max-content;
+}
+
+.fieldset-container{
+    border: none;
 }

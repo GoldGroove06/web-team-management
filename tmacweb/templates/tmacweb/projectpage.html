@@ -15,7 +15,7 @@
 </div>
 <div class="taskContainer">
     <div class="tasks">
-        <h2>Project Tasks</h2>
+        <h2 style="margin-left: 8px;">To Do</h2>
         <div class="btn-div" ></div>
             
 
@@ -25,7 +25,7 @@
     </div>
     
     <div class="active">
-        <h2>Active Tasks</h2>
+        <h2 style="margin-left: 8px;">In Progress</h2>
 
             <span class="active-scroll">
             </span>
@@ -33,7 +33,7 @@
         
     </div>
     <div class="completed">
-        <h2>Completed Tasks</h2>
+        <h2 style="margin-left: 8px;">Done</h2>
 
             <span class="completed-scroll">
             </span>
@@ -41,7 +41,7 @@
         
     </div>
     <div class="backlog">
-       <h2>Backlog Tasks</h2> 
+       <h2 style="margin-left: 8px;">To-Do Backlog</h2> 
 
         <span class="backlog-scroll">
         </span>
@@ -95,11 +95,11 @@
             </div>
             <form method="post"  class="inactive" id="task_form">
                 {% csrf_token %}
-                Task Name:<br> <input type="text" name="taskName" id="taskName" required class="input-box"><br>
-                Task Description:<br> <textarea name="taskDesc" id="taskDesc" required class="input-box"></textarea><br>
+                Task Title:<br> <input type="text" name="taskName" id="taskName" required class="input-box" placeholder="Enter a title"><br>
+                Description:<br> <textarea name="taskDesc" id="taskDesc" required class="input-box" placeholder="Describe the task"></textarea><br>
                 Last Date:<br> <input type="datetime-local" name="lastDate" id="lastDate" required class="input-box"><br>
-                Task assignee:<br> <input type="text" name="taskUser" id="taskUser" required class="input-box"><br>
-                <fieldset>
+                Task assignee:<br> <input type="text" name="taskUser" id="taskUser" required class="input-box" placeholder="Enter a username"><br>
+                <fieldset class="fieldset-container">
                     Select Priority :
                   
                     <div>
