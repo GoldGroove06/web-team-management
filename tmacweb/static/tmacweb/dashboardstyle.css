@@ -87,6 +87,7 @@
     margin:10px;
     border-radius: 10px;
     overflow-y: scroll;
+    max-height: 200px;
 }
 
 .member-div{

@@ -24,7 +24,7 @@ function page_render(){
         document.querySelector(".project_name").innerHTML=`<b>${data.project.project_name}</b>`
         document.querySelector(".project_desc").innerHTML=`${data.project.project_info}`
         
-        document.querySelector(".project_deadline").innerHTML=`<div class="btn btn-info pd_info">${data.project.project_deadline}</div>`
+        document.querySelector(".project_deadline").innerHTML=`Project Deadline: <br>${data.project.project_deadline}`
         if (data.project.project_user == user_id){
             document.querySelector(".am-btn-div").innerHTML ='<button type="button"  onclick="member_add()" class = "member-add-btn">Edit members</button>'
             document.querySelector(".btn-div").innerHTML = '<button type="button"  onclick="task_add()" class = "task-btn">Add Task</button>'
@@ -47,7 +47,7 @@ function page_render(){
 
 function member_add(){
     document.querySelector(".modal-title").innerHTML="Edit members"
-    
+    document.querySelector("#nm_user").value=""
     document.querySelector("#member_form").className="active"
     document.querySelector("#task_form").className="inactive"
     document.querySelector("#btn-sds").click();

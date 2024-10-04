@@ -43,7 +43,7 @@ function calendar_render() {
             extendedProps:{
               desc: data.user_tasks[i].task_info,
               ldate:date,
-              priority:data.team_tasks[i].priority,
+              priority:data.user_tasks[i].priority,
             }
           }
         )

@@ -9,16 +9,16 @@
 .project_name{
     font-size: 20px;
     color: white;
-    margin: 8px;
+    margin: 12px;
     width: 15% ;
 }
 .project_desc{
-    width: 80%;
+    width: 75%;
     height: fit-content;
     overflow-wrap: normal;
-   
+    
     border-radius: 10px;
-    margin: 8px;
+    margin: 14px;
     color: white;
    
     
@@ -28,6 +28,9 @@
     display: flex;
     flex-direction: row;
     margin: 8px;
+    background-color: rgb(30, 30, 30,0.75);
+    border-radius: 12px;
+   
 }
 .taskDiv{
     border: solid;
@@ -62,11 +65,13 @@
 
 .tasks-scroll, .active-scroll, .completed-scroll, .backlog-scroll {
     display: block;
-    height: 82%;
+    height: 88%;
     overflow-y: auto ;
     
     border-radius: 15px;
 }
+
+
 
 #task_form{
     
@@ -97,6 +102,7 @@
     
 }
 
+
 .taskhr {
   
     width: 90%; 
@@ -112,6 +118,7 @@
 .member-div{
     margin: 4px;
     padding: 4px;
+    color: white;
 }
 
 .add-member-box{
@@ -121,11 +128,35 @@
 
 .member-btn{
     float: right;
-    color: #5CB8E4;
+    color: white;
+    background-color: #1E1E1E;
+    border-radius: 6px;
+    outline: none;
+    border-style: none;
+   
 }
 
 #nm_user{
     width:70%;
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    border-radius: 8px;
+}
+
+
+#nm_user:focus{ 
+    background-color: transparent;
+    color: white;
+}
+
+#nm_submit{
+    background-color: #1E1E1E;
+    color: white;
+    border-radius: 8px;
+    border-style:none ;
+    padding: 8px;
+   
 }
 
 
@@ -143,7 +174,7 @@
 
 .members{
     overflow-y: scroll;
-    height: 80%
+    height: 200px
 }
 
 .lastdate{
@@ -155,18 +186,18 @@ body{
     color: #BB86FC
 }
 .task-btn{
-    background-color: black;
+    background-color: #121212;
     color: white;
     border-radius: 6px;
     outline: none;
     border-style: none;
-    padding: 4px;
+    padding: 8px;
     margin: 4px;
     
 }
 
 .member-add-btn{
-    background-color: black;
+    background-color: #121212;
     color: white;
     border-radius: 6px;
     outline: none;
@@ -228,6 +259,45 @@ body{
       float: none;
       margin: 8px 0;
   }
+  
+    .member-add-btn{
+        padding: 8px;
+    }
+    .pnamedesc_container{
+        padding: 0;
+        margin: 8px;
+    }
+   
+}
+
+@media screen and (min-width: 800px) {
+    .tasks-scroll, .active-scroll, .completed-scroll, .backlog-scroll {
+        display: block;
+        height: 88%;
+        overflow-y: auto ;
+        
+        border-radius: 15px;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        border-radius: 15px;
+      }
+     
+     ::-webkit-scrollbar-track {
+       background: #f1f1f1;
+       
+       border-radius: 15px;
+     }
+     
+     ::-webkit-scrollbar-thumb {
+       background: #121212;
+       border-radius: 15px;
+     }
+     
+     ::-webkit-scrollbar-thumb:hover {
+       background: #121212;
+     }
 }
 
 .ml-2{
@@ -237,6 +307,7 @@ body{
 .toast-header{
     display: flex;
     justify-content: end;
+    background-color: transparent;
 }
 
 .toast {
@@ -244,6 +315,9 @@ body{
     top: 30px;
     right: 20px;
     z-index: 1050;
+    background-color: transparent;
+    z-index: 9999999;
+    color: white;
 }
 
 
@@ -273,4 +347,24 @@ body{
 
 .fieldset-container{
     border: none;
+}
+
+.btn-div{
+    font-size:medium;
+    float: right;
+}
+
+.project_deadline{
+    font-size: 12px;
+    text-wrap: nowrap;
+    margin: 8px;
+}
+
+#nt_submit{
+    float: right;
+    background-color: #1E1E1E;
+    color: white;
+    border-radius: 8px;
+    border-style:none ;
+    padding: 8px;
 }

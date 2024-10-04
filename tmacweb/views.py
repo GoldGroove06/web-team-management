@@ -101,7 +101,7 @@ def createproject(request):
         )
       
         
-        return HttpResponseRedirect(reverse("homepage"))
+        return HttpResponseRedirect(reverse("dashboard"))
     return render(request, "tmacweb/createproject.html")
 
 def projectpage(request, id):
@@ -146,6 +146,7 @@ def apipl(request):
             "project_id"   : i.project_id.project_id,
             "project_name" : i.project_id.project_name,
             "project_info" : i.project_id.project_info, 
+            "project_deadline" : i.project_id.project_deadline,
         }
         r_dict[p] = temp_dict
         p = p + 1
@@ -190,9 +191,11 @@ def apiproject(request, id):
     backlog = Tasks.objects.filter(project_id = project, status = "backlog").count()
     tasks = Tasks.objects.filter(project_id = project, status = "tasks").count()
     print(completed)
-    percentage = (int(completed)  / task_list.count()) * 100
+    
     if completed == 0:
         percentage = 0
+    else:
+        percentage = (int(completed)  / task_list.count()) * 100
     print(round(percentage))
     p_list["active"] = active
     p_list["completed"] = completed
