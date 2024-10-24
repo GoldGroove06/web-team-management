@@ -1,6 +1,6 @@
 Team Project Management
 A Team Project Management Website is a collaborative platform designed to help teams plan, organize, and manage their tasks effectively. The website allows team members to break down projects into smaller tasks, assign them to individuals, track progress, and ensure deadlines are met. It offers features such as task prioritization, scheduling, and progress monitoring, all in one centralized system.
-
+![Dashboard](tmacweb/static/tmacweb/dashboard.png)
 
  Key Features:
 
@@ -24,7 +24,7 @@ A Team Project Management Website is a collaborative platform designed to help t
 5. Mobile Responsive:
    - The website is fully mobile-responsive, ensuring users can access and manage tasks on the go.
    - Provides flexibility for remote teams and users who need to manage projects while away from their desks.
-
+![Project Page](projectPage.png)
  Benefits:
 
 - Improved Organization: Breaks down complex projects into manageable tasks with well-defined roles and responsibilities, ensuring clarity and order.
